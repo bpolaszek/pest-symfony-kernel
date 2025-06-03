@@ -14,7 +14,6 @@
     "phpstan/phpstan": "^1.11",
     "symfony/console": "~6.4 | ~7.1",
     "symfony/dotenv": "~6.4 | ~7.1",
-    "symfony/flex": "^2",
     "symfony/runtime": "~6.4 | ~7.1",
     "symfony/yaml": "~6.4 | ~7.1"
   },
