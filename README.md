@@ -1,0 +1,57 @@
+# Pest Symfony Kernel
+
+[![Tests](https://github.com/bpolaszek/pest-symfony-kernel/actions/workflows/tests.yml/badge.svg)](https://github.com/bpolaszek/pest-symfony-kernel/actions/workflows/tests.yml)
+[![Old Symfony Versions](https://github.com/bpolaszek/pest-symfony-kernel/actions/workflows/tests-old-versions.yml/badge.svg)](https://github.com/bpolaszek/pest-symfony-kernel/actions/workflows/tests-old-versions.yml)
+[![Coverage](https://codecov.io/gh/bpolaszek/pest-symfony-kernel/branch/main/graph/badge.svg)](https://codecov.io/gh/bpolaszek/pest-symfony-kernel)
+
+Symfony Kernel and dependency injection for [Pest PHP](https://pestphp.com/).
+
+This library provides a simple way to access the Symfony kernel, container, and services in your Pest tests, making it easier to write integration tests for Symfony applications.
+
+## Requirements
+
+- PHP 8.2+
+- Pest PHP 2.35+ or 3.0+
+- Symfony 6.4+ or 7.x
+
+## Installation
+
+```bash
+composer require --dev bentools/pest-symfony-kernel
+```
+
+## Usage
+
+```php
+use Symfony\Component\Routing\RouterInterface;
+use function BenTools\Pest\Symfony\inject;
+
+it('injects my router! 🤯', function () {
+    $router = inject(RouterInterface::class); // Fetch router from the service container
+    expect($router)->toBeInstanceOf(RouterInterface::class); // ✨
+});
+```
+
+## How It Works
+
+This library provides three main functions under the `BenTools\Pest\Symfony` namespace:
+
+1. `app()`: Creates and returns a Symfony kernel instance for testing
+2. `container()`: Gets the test service container from the kernel
+3. `inject()`: Retrieves a service from the container by its ID
+
+These functions make it easier to work with Symfony's dependency injection container in Pest tests, allowing for simpler access to the application kernel, container, and services.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+MIT.
