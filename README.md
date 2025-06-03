@@ -1,4 +1,4 @@
-# Pest Symfony Kernel
+# Symfony DI Container for Pest
 
 [![Tests](https://github.com/bpolaszek/pest-symfony-kernel/actions/workflows/tests.yml/badge.svg)](https://github.com/bpolaszek/pest-symfony-kernel/actions/workflows/tests.yml)
 [![Old Symfony Versions](https://github.com/bpolaszek/pest-symfony-kernel/actions/workflows/tests-old-versions.yml/badge.svg)](https://github.com/bpolaszek/pest-symfony-kernel/actions/workflows/tests-old-versions.yml)
