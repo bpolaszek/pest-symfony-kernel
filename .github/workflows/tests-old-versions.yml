@@ -1,0 +1,60 @@
+name: Test old versions
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  tests:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Symfony 6.4 with PHP from 8.2 to 8.3
+          - php-version: '8.2'
+            symfony-version: '6.4'
+          - php-version: '8.3'
+            symfony-version: '6.4'
+
+          # Symfony 7.1 with PHP from 8.2 to 8.4
+          - php-version: '8.2'
+            symfony-version: '7.1'
+          - php-version: '8.3'
+            symfony-version: '7.1'
+          - php-version: '8.4'
+            symfony-version: '7.1'
+
+          # Symfony 7.2 with PHP from 8.2 to 8.4
+          - php-version: '8.2'
+            symfony-version: '7.2'
+          - php-version: '8.3'
+            symfony-version: '7.2'
+          - php-version: '8.4'
+            symfony-version: '7.2'
+
+          # Symfony 7.3 with PHP from 8.2 to 8.4
+          - php-version: '8.2'
+            symfony-version: '7.3'
+          - php-version: '8.3'
+            symfony-version: '7.3'
+          - php-version: '8.4'
+            symfony-version: '7.3'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php-version }}'
+
+      - name: Install dependencies
+        run: |
+          composer require symfony/framework-bundle:${{ matrix.symfony-version }}.* symfony/console:${{ matrix.symfony-version }}.* symfony/dotenv:${{ matrix.symfony-version }}.* symfony/runtime:${{ matrix.symfony-version }}.* symfony/yaml:${{ matrix.symfony-version }}.* --no-update
+          composer install --no-progress --no-suggest
+
+      - name: Run tests
+        run: vendor/bin/pest
