@@ -13,12 +13,7 @@ function app(bool $reInstanciate = false): KernelInterface
     static $kernel;
 
     if (null === $kernel || $reInstanciate) {
-        $testCase = new class () extends KernelTestCase {
-            public function __construct()
-            {
-                parent::__construct(uniqid());
-            }
-
+        $testCase = new class (uniqid(more_entropy: true)) extends KernelTestCase {
             public function getKernel(): KernelInterface
             {
                 self::bootKernel();
