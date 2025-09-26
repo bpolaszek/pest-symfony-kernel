@@ -11,7 +11,7 @@ This library provides a simple way to access the Symfony kernel, container, and 
 ## Requirements
 
 - PHP 8.2+
-- Pest PHP 2.35+ or 3.0+
+- Pest PHP 2.35+, 3.0+ or 4.0+
 - Symfony 6.4+ or 7.x
 
 ## Installation
