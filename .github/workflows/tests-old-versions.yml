@@ -19,29 +19,13 @@ jobs:
           - php-version: '8.3'
             symfony-version: '6.4'
 
-          # Symfony 7.1 with PHP from 8.2 to 8.4
+          # Symfony 7.4 with PHP from 8.2 to 8.4
           - php-version: '8.2'
-            symfony-version: '7.1'
+            symfony-version: '7.4'
           - php-version: '8.3'
-            symfony-version: '7.1'
+            symfony-version: '7.4'
           - php-version: '8.4'
-            symfony-version: '7.1'
-
-          # Symfony 7.2 with PHP from 8.2 to 8.4
-          - php-version: '8.2'
-            symfony-version: '7.2'
-          - php-version: '8.3'
-            symfony-version: '7.2'
-          - php-version: '8.4'
-            symfony-version: '7.2'
-
-          # Symfony 7.3 with PHP from 8.2 to 8.4
-          - php-version: '8.2'
-            symfony-version: '7.3'
-          - php-version: '8.3'
-            symfony-version: '7.3'
-          - php-version: '8.4'
-            symfony-version: '7.3'
+            symfony-version: '7.4'
 
     steps:
       - uses: actions/checkout@v3
