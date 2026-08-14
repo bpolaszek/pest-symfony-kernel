@@ -7,11 +7,11 @@
     "php": ">=8.2",
     "ext-ctype": "*",
     "ext-iconv": "*",
-    "pestphp/pest": "~2.35 || ~3.0 || ~4.0",
+    "pestphp/pest": "~2.35 || ~3.0 || ~4.0 || ~5.0",
     "symfony/framework-bundle": "~6.4 || ~7.4 || ~8.0"
   },
   "require-dev": {
-    "phpstan/phpstan": "^1.11",
+    "phpstan/phpstan": "^2.2",
     "symfony/console": "~6.4 || ~7.4 || ~8.0",
     "symfony/dotenv": "~6.4 || ~7.4 || ~8.0",
     "symfony/runtime": "~6.4 || ~7.4 || ~8.0",
