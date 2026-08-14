@@ -27,6 +27,16 @@ jobs:
           - php-version: '8.4'
             symfony-version: '7.4'
 
+          # Symfony 8.0 with PHP 8.4
+          - php-version: '8.4'
+            symfony-version: '8.0'
+
+    env:
+      # Forces every symfony/* package (not just the ones we require directly) onto the
+      # same branch, so composer can't silently mix e.g. framework-bundle 7.4 with
+      # http-kernel 8.1. See symfony/flex's SYMFONY_REQUIRE support.
+      SYMFONY_REQUIRE: '${{ matrix.symfony-version }}.*'
+
     steps:
       - uses: actions/checkout@v3
 
@@ -35,10 +45,13 @@ jobs:
         with:
           php-version: '${{ matrix.php-version }}'
 
-      - name: Install dependencies
+      - name: Install Symfony Flex
         run: |
-          composer require symfony/framework-bundle:${{ matrix.symfony-version }}.* symfony/console:${{ matrix.symfony-version }}.* symfony/dotenv:${{ matrix.symfony-version }}.* symfony/runtime:${{ matrix.symfony-version }}.* symfony/yaml:${{ matrix.symfony-version }}.* --no-update
-          composer install --no-progress --no-suggest
+          composer global config --no-plugins allow-plugins.symfony/flex true
+          composer global require --no-progress symfony/flex
+
+      - name: Install dependencies
+        run: composer update --no-progress --no-suggest
 
       - name: Run tests
         run: vendor/bin/pest
