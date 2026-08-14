@@ -13,23 +13,30 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Symfony 6.4 with PHP from 8.2 to 8.3
+          # Symfony 6.4 with PHP from 8.2 to 8.3 — only Pest 2.x supports Symfony 6.4
+          # (Pest 3+'s nunomaduro/collision requires symfony/console 7.1+).
           - php-version: '8.2'
             symfony-version: '6.4'
+            pest-version: '~2.35'
           - php-version: '8.3'
             symfony-version: '6.4'
+            pest-version: '~2.35'
 
           # Symfony 7.4 with PHP from 8.2 to 8.4
           - php-version: '8.2'
             symfony-version: '7.4'
+            pest-version: '~3.0'
           - php-version: '8.3'
             symfony-version: '7.4'
+            pest-version: '~4.0'
           - php-version: '8.4'
             symfony-version: '7.4'
+            pest-version: '~4.0'
 
-          # Symfony 8.0 with PHP 8.4
+          # Symfony 8.0 with PHP 8.4 — Pest 5 needs symfony/process ^8.1, so 4.x here
           - php-version: '8.4'
             symfony-version: '8.0'
+            pest-version: '~4.0'
 
     env:
       # Forces every symfony/* package (not just the ones we require directly) onto the
@@ -51,7 +58,9 @@ jobs:
           composer global require --no-progress symfony/flex
 
       - name: Install dependencies
-        run: composer update --no-progress --no-suggest
+        run: |
+          composer require "pestphp/pest:${{ matrix.pest-version }}" --no-update
+          composer update --no-progress --no-suggest
 
       - name: Run tests
         run: vendor/bin/pest
